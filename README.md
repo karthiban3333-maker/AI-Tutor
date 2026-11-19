@@ -1,24 +1,37 @@
-# 🎓 AI Tutor
+# 🎓 AI Tutor — Multimodal Personalized Learning Platform
 
-> An intelligent, personalized learning platform powered by Google Gemini AI and Firebase — turning any study material into interactive tutoring sessions with spaced-repetition flashcard reviews.
+> **Transform study materials into interactive AI tutoring sessions with real-time comprehension evaluation and automated spaced-repetition flashcards.**
 
-AI Tutor lets students upload lecture notes, PDFs, PowerPoint slides, or images, and instantly generates structured study modules. Each module comes with a live AI tutor chat interface that teaches, challenges, and evaluates understanding in real time. After each session, the app auto-generates targeted flashcards based on concepts the student struggled with, delivered through a spaced-repetition review system.
+AI Tutor is an intelligent educational platform powered by Google Gemini AI and Firebase. It turns dense textbooks, lecture notes, PDFs, PowerPoint slides, and handwritten diagrams into structured, interactive study modules — providing continuous feedback, Socratic reasoning challenges, and automated flashcard retention systems.
+
+---
+
+## 📖 About the Project
+
+### 🎯 Problem Statement
+Students are frequently overwhelmed by unstructured study resources, passive reading habits, and lack of personalized 1-on-1 tutoring. Traditional study workflows lack active recall reinforcement, fail to identify specific knowledge gaps mid-lesson, and do not provide automated follow-up on weak topics, leading to poor long-term retention.
+
+### 💡 The Solution
+AI Tutor acts as a 24/7 personal academic mentor. By uploading course materials in any format, students receive AI-synthesized learning modules with dynamic difficulty adjustment. The AI tutor chats interactively, presents mid-lesson comprehension checkpoints, switches between explanatory and Socratic questioning modes, scores answers with constructive feedback, and automatically converts misunderstood concepts into spaced-repetition review decks.
+
+### 🌟 Core Value Proposition
+- **Multimodal Content Ingestion**: Instant client-side parsing of text, images, PDFs, and slide decks into bite-sized learning curricula.
+- **Active Recall & Socratic Reasoning**: Interactive dialogue where the AI probes for understanding rather than just spoon-feeding answers.
+- **Automated Spaced-Repetition**: Automatically compiles struggled topics into Leitner-style flashcard decks with adaptive review intervals.
+- **Quantifiable Progress Tracking**: Visual score distributions, topic mastery ratings, and study streak analytics.
 
 ---
 
 ## ✨ Features
 
-- **📄 Multimodal Input** — Upload images, PDFs, or PPTX files; text is extracted automatically client-side (no server uploads)
-- **🧠 AI-Generated Study Modules** — Gemini 2.5 Flash breaks study material into 3–5 focused, labelled modules per topic
-- **💬 Interactive AI Tutor Chat** — Conversational tutor that explains, asks comprehension-check questions, and tracks incorrect answers mid-session
-- **🧐 Socratic Mode** — Toggle a guided questioning mode where the tutor never gives answers directly, nudging students to reason it out
-- **📊 Session Evaluation** — "Finish & Evaluate" scores the student's understanding (1–10), provides written feedback, and updates module completion status
-- **🃏 Spaced-Repetition Flashcards** — Flashcards are automatically generated from the student's struggled concepts after each evaluated session
-- **🔁 Flashcard Review Deck** — Flip-card UI with Again / Good / Easy ratings that schedule the next review (1 / 3 / 7 days)
-- **📈 Performance Dashboard** — Pie chart (score distribution), bar chart (weekly activity), and weak-area rankings with visual score bars
-- **🔥 Streak Tracking** — Daily study streaks updated on every completed module evaluation
-- **🔐 Firebase Authentication** — Secure Google / email login with per-user data isolation in Firestore
-- **🗂️ Topic Management** — Organise modules by topic with tabbed navigation; delete individual modules or entire subjects
+- 📄 **Multimodal Document Upload** — Direct client-side parsing of lecture images, PDFs, and PPTX files with zero server storage overhead.
+- 🧠 **AI-Generated Study Modules** — Google Gemini 2.5 Flash decomposes complex syllabus documents into 3–5 focused, logical modules.
+- 💬 **Interactive AI Tutor Chat** — Real-time conversational tutor explaining concepts, asking verification questions, and grading student comprehension.
+- 🏛️ **Socratic Guided Mode** — Optional tutoring mode that withholds direct answers, instead guiding students through step-by-step reasoning.
+- 📊 **Session Comprehension Evaluation** — "Finish & Evaluate" engine scores student understanding (1–10) with detailed performance feedback.
+- 🗂️ **Adaptive Spaced-Repetition Flashcards** — Auto-generated flashcard decks focused strictly on concepts the student struggled with during the session.
+- 📈 **Visual Performance Analytics** — Interactive Chart.js charts depicting score distributions, weekly study activity, and weak topic rankings.
+- 🔒 **Secure Firebase Authentication** — Google and email/password authentication with isolated per-user data persistence in Cloud Firestore.
 
 ---
 
@@ -26,98 +39,73 @@ AI Tutor lets students upload lecture notes, PDFs, PowerPoint slides, or images,
 
 | Layer | Technology |
 |---|---|
-| Frontend Framework | React 19 + Vite 7 |
-| Routing | React Router DOM v7 |
-| AI / LLM | Google Gemini 2.5 Flash (`@google/generative-ai`) |
-| Backend / Database | Firebase Firestore + Firebase Auth |
-| Deployment | Firebase Hosting |
-| Charts | Chart.js + react-chartjs-2 |
-| PDF Parsing | pdfjs-dist (client-side, CDN worker) |
-| PPTX Parsing | JSZip (client-side XML extraction) |
-| Icons | Lucide React |
-| Cloud Functions | Firebase Functions (Node.js) |
-| Linting | ESLint 9 |
+| **Frontend Framework** | React 19 + Vite 7 |
+| **Routing & Navigation** | React Router DOM v7 |
+| **Styling & Icons** | Vanilla CSS3, Lucide React |
+| **AI / LLM Integration** | Google Gemini 2.5 Flash (`@google/generative-ai`) |
+| **Backend & Database** | Firebase Authentication + Cloud Firestore |
+| **Data Visualizations** | Chart.js + react-chartjs-2 |
+| **Document Processing** | pdfjs-dist (client-side PDF extraction), JSZip |
 
 ---
 
 ## 📁 Folder Structure
 
 ```
-AI TUTOR/
+AI-Tutor/
+├── functions/                  # Firebase Cloud Functions & backend utilities
+├── public/                     # Public assets and icons
 ├── src/
-│   ├── components/
-│   │   └── Navbar.jsx          # Top navigation bar
-│   ├── contexts/
-│   │   └── AuthContext.jsx     # Firebase Auth context & provider
-│   ├── lib/
-│   │   ├── firebase.js         # Firestore & Auth initialisation
-│   │   └── gemini.js           # All Gemini API calls (modules, chat, eval, flashcards)
-│   ├── pages/
-│   │   ├── Auth.jsx            # Login / sign-up page
-│   │   ├── Home.jsx            # Module library + study material upload
-│   │   ├── Chat.jsx            # Per-module AI tutor chat interface
-│   │   ├── Dashboard.jsx       # Progress charts & weak-area analysis
-│   │   ├── Review.jsx          # Spaced-repetition flashcard review
-│   │   └── Profile.jsx         # User profile & settings
-│   ├── App.jsx                 # Route definitions & layout wrapper
-│   └── main.jsx                # React app entry point
-├── functions/
-│   └── index.js                # Firebase Cloud Functions
-├── public/                     # Static assets
-├── firebase.json               # Firebase hosting & functions config
-├── firestore.rules             # Firestore security rules
-├── vite.config.js              # Vite build configuration
-└── package.json
+│   ├── assets/                 # Graphics and SVGs
+│   ├── components/             # Navbar, module cards, flashcard flip widgets
+│   ├── contexts/               # AuthContext state provider
+│   ├── lib/                    # Firebase client and Gemini AI prompt workflows
+│   ├── pages/                  # Views (Home, Auth, Dashboard, Chat, Review, Profile)
+│   ├── App.jsx                 # Route definitions and application layout
+│   └── main.jsx                # Application entrypoint
+├── firebase.json               # Firebase deployment configuration
+├── firestore.rules             # Firestore access rules
+├── package.json                # Project dependencies and npm scripts
+└── vite.config.js              # Vite bundler configuration
 ```
 
 ---
 
-## 🚀 Installation & Running
+## 🚀 How to Install and Run
 
 ### Prerequisites
-- Node.js ≥ 18
-- A [Firebase project](https://console.firebase.google.com/) with Firestore and Authentication enabled
-- A [Google AI Studio](https://aistudio.google.com/) API key (Gemini)
+- [Node.js](https://nodejs.org/) (v18+) & `npm`
+- A Google Gemini API key from [Google AI Studio](https://aistudio.google.com/)
+- A Firebase project with Firestore and Authentication enabled
 
-### 1. Clone the repository
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/karthiban3333-maker/AI-Tutor.git
 cd AI-Tutor
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Configure environment variables
-Create a `.env` file in the project root:
-```env
-VITE_GOOGLE_API_KEY=your_gemini_api_key_here
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
+### 3. Configure Environment Variables
+Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
 ```
+Add your `VITE_GOOGLE_API_KEY` and Firebase configuration keys.
 
-### 4. Start the development server
+### 4. Start Development Server
 ```bash
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open `http://localhost:5173` in your browser.
 
-### 5. Build for production
+### 5. Build for Production
 ```bash
 npm run build
-```
-
-### 6. Deploy to Firebase Hosting
-```bash
-npm install -g firebase-tools
-firebase login
-firebase deploy
+npm run preview
 ```
 
 ---
@@ -130,7 +118,7 @@ firebase deploy
 
 ## 📄 License
 
-This project is private and proprietary.
+This project is private and proprietary. All rights reserved.
 
 ---
 
